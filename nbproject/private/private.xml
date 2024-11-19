@@ -3,11 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Sistemas/Desktop/EDO/REPOS/BankApp/src/bank/TransactionType.java</file>
-            <file>file:/C:/Users/Sistemas/Desktop/EDO/REPOS/BankApp/src/bank/User.java</file>
-            <file>file:/C:/Users/Sistemas/Desktop/EDO/REPOS/BankApp/src/bank/BankFrame.java</file>
-            <file>file:/C:/Users/Sistemas/Desktop/EDO/REPOS/BankApp/src/bank/Transaction.java</file>
-            <file>file:/C:/Users/Sistemas/Desktop/EDO/REPOS/BankApp/src/bank/Account.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/models/storage/UserStorage.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/models/storage/AccountStorage.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/UserController.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/views/BankFrame.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/bank/TransactionType.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/models/Account.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/models/Transaction.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/AccountController.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/models/storage/TransactionStorage.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/models/User.java</file>
         </group>
     </open-files>
 </project-private>
