@@ -675,7 +675,7 @@ public class BankFrame extends javax.swing.JFrame {
 
         listAccount.sort((obj1, obj2) -> (obj1.getId().compareTo(obj2.getId())));
 
-        for (Account account : this.accounts) {
+        for (Account account : listAccount) {
             model.addRow(new Object[]{account.getId(), account.getOwner().getId(), account.getBalance()});
         }
     }//GEN-LAST:event_btnRefreshListAccountsActionPerformed
