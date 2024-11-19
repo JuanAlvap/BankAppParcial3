@@ -35,21 +35,43 @@ public class AccountController {
                 return new Response("initial balance be numeric", Status.BAD_REQUEST);
             }
 
+            boolean validate = false;
+            for (User user : UserController.getUsers()) {
+                if (user.getId() == idInt) {
+                    validate = true;
+                    break;
+                }
+            }
+            if (!validate) {
+                return new Response("Id must be numeric", Status.BAD_REQUEST);
+            }
+
             User selectedUser = null;
             for (User user : UserController.getUsers()) {
                 if (user.getId() == idInt && selectedUser == null) {
                     selectedUser = user;
                 }
             }
-
+            String accountId = "";
             if (selectedUser != null) {
-                Random random = new Random();
-                int first = random.nextInt(1000);
-                int second = random.nextInt(1000000);
-                int third = random.nextInt(100);
+                boolean validateRandom = true;
+                while (validateRandom) {
+                    Random random = new Random();
+                    int first = random.nextInt(1000);
+                    int second = random.nextInt(1000000);
+                    int third = random.nextInt(100);
 
-                String accountId = String.format("%03d", first) + "-" + String.format("%06d", second) + "-" + String.format("%02d", third);
+                    accountId = String.format("%03d", first) + "-" + String.format("%06d", second) + "-" + String.format("%02d", third);
 
+                    for (Account account : AccountStorage.getInstance().getAccounts()) {
+                        if (account.getId().equals(accountId)) {
+                            validateRandom = true;
+                            break;
+                        }else{
+                            validateRandom = false;
+                        }
+                    }
+                }
                 AccountStorage storage = AccountStorage.getInstance();
                 if (!storage.addAccount(new Account(accountId, selectedUser, initialBalanceDouble))) {
                     return new Response("A user with that id already exists", Status.BAD_REQUEST);

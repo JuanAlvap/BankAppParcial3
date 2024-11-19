@@ -16,7 +16,7 @@ public class UserController {
             int idInt, ageInt;
             try{
                 idInt = Integer.parseInt(idText);
-                if(idInt<1){
+                if(idInt<0 || idInt>999999999){
                     return new Response("Id must be numeric", Status.BAD_REQUEST);
                 }
             }catch(NumberFormatException ex){
