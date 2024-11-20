@@ -10,24 +10,33 @@ import core.controllers.utils.Status;
 import core.models.Account;
 import core.models.Transaction;
 import core.models.User;
+import core.models.storage.AccountStorage;
 import core.models.storage.TransactionStorage;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
  * @author cande
  */
 public class TransactionController {
-
-    private static ArrayList<Account> accounts;
-    private static ArrayList<Transaction> transactions;
-
+    
+    public static ArrayList<Transaction> getSortedTransactions(){
+        ArrayList<Transaction> sortedClone = (ArrayList<Transaction>) getTransactions().clone();
+        Collections.reverse(sortedClone);
+        return sortedClone;
+    }
+    
+    private static ArrayList<Transaction> getTransactions(){
+        return TransactionStorage.getInstance().getTransactions();
+    }
+    
     public static Response executeTransfer(String sourceAccountId, String destinationAccountId, String amount) {
         try {
             
             try{
                 //No es numero
-                Integer.parseInt(sourceAccountId);
+                
             }
             catch(NumberFormatException ex){
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
@@ -50,7 +59,9 @@ public class TransactionController {
             
             try{
                 //No es numero
-                Integer.parseInt(destinationAccountId);
+                String numerosId[] = destinationAccountId.split("-");
+                var sum = numerosId[0]+numerosId[1]+numerosId[2];
+                Integer.parseInt(sum);
             }
             catch(NumberFormatException ex){
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
@@ -70,12 +81,12 @@ public class TransactionController {
             
             Account sourceAccount = null;
             Account destinationAccount = null;
-            for (Account account : accounts) {
+            for (Account account : AccountStorage.getInstance().getAccounts()) {
                 if (account.getId().equals(sourceAccountId)) {
                     sourceAccount = account;
                 }
             }
-            for (Account account : accounts) {
+            for (Account account : AccountStorage.getInstance().getAccounts()) {
                 if (account.getId().equals(destinationAccount)) {
                     destinationAccount = account;
                 }
@@ -83,7 +94,7 @@ public class TransactionController {
             boolean withdrawed = sourceAccount.withdraw(amountNumber);
             if (destinationAccount != null && withdrawed) {
                 TransactionStorage.getInstance().addTransaction(new Transaction(TransactionType.TRANSFER, sourceAccount, destinationAccount, amountNumber));
-                return new Response("OK", Status.OK);
+                return new Response("OK", Status.CREATED);
             }
             else if(!withdrawed){
                  return new Response("insufficient funds".toUpperCase(), Status.NOT_FOUND);
@@ -112,7 +123,7 @@ public class TransactionController {
             
             try{
                 //No es numero
-                Integer.parseInt(sourceAccountId);
+             
             }
             catch(NumberFormatException ex){
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
@@ -130,7 +141,7 @@ public class TransactionController {
             
 
             Account sourceAccount = null;
-            for (Account account : accounts) {
+            for (Account account : AccountStorage.getInstance().getAccounts()) {
                 if (account.getId().equals(sourceAccountId)) {
                     sourceAccount = account;
                 }
@@ -143,7 +154,7 @@ public class TransactionController {
             boolean withdrawed = sourceAccount.withdraw(amountNumber);
             if (withdrawed){
                 TransactionStorage.getInstance().addTransaction(new Transaction(TransactionType.WITHDRAW, sourceAccount, null, amountNumber));
-                return new Response("OK", Status.OK);
+                return new Response("OK", Status.CREATED);
             }else{
                 return new Response("insufficient funds".toUpperCase(), Status.NOT_FOUND);
             }
@@ -167,7 +178,8 @@ public class TransactionController {
             
             try{
                 //No es numero
-                Integer.parseInt(destinationAccountId);
+                
+                
             }
             catch(NumberFormatException ex){
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
@@ -184,7 +196,7 @@ public class TransactionController {
             }
             
             Account destinationAccount = null;
-            for (Account account : accounts) {
+            for (Account account : AccountStorage.getInstance().getAccounts()) {
                 if (account.getId().equals(destinationAccountId)) {
                     destinationAccount = account;
                 }
@@ -192,7 +204,7 @@ public class TransactionController {
             if (destinationAccount != null) {
                 destinationAccount.deposit(amountNumber);
                 TransactionStorage.getInstance().addTransaction(new Transaction(TransactionType.DEPOSIT, null, destinationAccount, amountNumber));
-                return new Response("OK", Status.OK);
+                return new Response("OK", Status.CREATED);
             }
             else{
                 return new Response("ID does not match any account".toUpperCase(), Status.NOT_FOUND);

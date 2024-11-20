@@ -611,6 +611,10 @@ public class BankFrame extends javax.swing.JFrame {
                     
                     response = TransactionController.executeTransfer(sourceIdText,destinationIdText, amountText);
                     
+                    if (response.getStatus() != Status.CREATED) {
+                        JOptionPane.showMessageDialog(null, response.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                    
                     txtSourceAccount.setText("");
                     txtDestinationAccount.setText("");
                     txtAmount.setText("");
@@ -659,11 +663,8 @@ public class BankFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tableListTransactions.getModel();
         model.setRowCount(0);
-
-        ArrayList<Transaction> transactionsCopy = (ArrayList<Transaction>) this.transactions.clone();
-        Collections.reverse(transactionsCopy);
-
-        for (Transaction transaction : transactionsCopy) {
+        
+        for (Transaction transaction : TransactionController.getSortedTransactions()) {
             model.addRow(new Object[]{transaction.getType().name(), (transaction.getSourceAccount() != null ? transaction.getSourceAccount().getId() : "None"), (transaction.getDestinationAccount() != null ? transaction.getDestinationAccount().getId() : "None"), transaction.getAmount()});
         }
     }//GEN-LAST:event_btnListTransactionsActionPerformed
