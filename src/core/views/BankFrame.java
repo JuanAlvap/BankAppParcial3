@@ -574,7 +574,7 @@ public class BankFrame extends javax.swing.JFrame {
     private void btnExecuteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteActionPerformed
         // TODO add your handling code here:
         String typeText = boxType.getItemAt(boxType.getSelectedIndex());
-        String sourceIdText = null;
+        String sourceIdText = txtSourceAccount.getText();
         String destinationIdText = txtDestinationAccount.getText();
         String amountText = txtAmount.getText();
         Response response;
