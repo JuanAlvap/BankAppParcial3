@@ -5,9 +5,9 @@
 package core.views;
 
 import bank.TransactionType;
-import core.controllers.AccountController;
+import core.controllers.account.AccountController;
 import core.controllers.TransactionController;
-import core.controllers.UserController;
+import core.controllers.user.UserController;
 import core.controllers.utils.Response;
 import core.models.Account;
 import core.models.Transaction;

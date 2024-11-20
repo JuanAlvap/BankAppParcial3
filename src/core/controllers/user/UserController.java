@@ -1,4 +1,4 @@
-package core.controllers;
+package core.controllers.user;
 
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
