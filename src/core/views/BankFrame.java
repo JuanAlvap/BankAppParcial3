@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import core.controllers.utils.Status;
 
 /**
  *
@@ -575,80 +576,47 @@ public class BankFrame extends javax.swing.JFrame {
         String typeText = boxType.getItemAt(boxType.getSelectedIndex());
         String sourceIdText = null;
         String destinationIdText = txtDestinationAccount.getText();
-        String amountText =txtAmount.getText();
-        Response response = TransactionController.executeTransaction(sourceIdText, destinationIdText, amountText);
-        
+        String amountText = txtAmount.getText();
+        Response response;
+        //Response response = TransactionController.executeTransaction(sourceIdText, destinationIdText, amountText);
         try {
             String type = boxType.getItemAt(boxType.getSelectedIndex());
             switch (type) {
-                case "Deposit": {
-                    String destinationAccountId = txtDestinationAccount.getText();
-                    double amount = Double.parseDouble(txtAmount.getText());
+                case "Deposit":
 
-                    Account destinationAccount = null;
-                    for (Account account : this.accounts) {
-                        if (account.getId().equals(destinationAccountId)) {
-                            destinationAccount = account;
-                        }
+                    response = TransactionController.executeDeposit(destinationIdText, amountText);
+
+                    if (response.getStatus() != Status.CREATED) {
+                        JOptionPane.showMessageDialog(null, response.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
-                    if (destinationAccount != null) {
-                        destinationAccount.deposit(amount);
-
-                        this.transactions.add(new Transaction(TransactionType.DEPOSIT, null, destinationAccount, amount));
-
-                        txtSourceAccount.setText("");
-                        txtDestinationAccount.setText("");
-                        txtAmount.setText("");
-                    }
+                    txtSourceAccount.setText("");
+                    txtDestinationAccount.setText("");
+                    txtAmount.setText("");
                     break;
-                }
-                case "Withdraw": {
-                    String sourceAccountId = txtSourceAccount.getText();
-                    double amount = Double.parseDouble(txtAmount.getText());
 
-                    Account sourceAccount = null;
-                    for (Account account : this.accounts) {
-                        if (account.getId().equals(sourceAccountId)) {
-                            sourceAccount = account;
-                        }
-                    }
-                    if (sourceAccount != null && sourceAccount.withdraw(amount)) {
-                        this.transactions.add(new Transaction(TransactionType.WITHDRAW, sourceAccount, null, amount));
+                case "Withdraw":
 
-                        txtSourceAccount.setText("");
-                        txtDestinationAccount.setText("");
-                        txtAmount.setText("");
+                    response = TransactionController.executeWithdraw(sourceIdText, amountText);
+
+                    if (response.getStatus() != Status.CREATED) {
+                        JOptionPane.showMessageDialog(null, response.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
+
+                    txtSourceAccount.setText("");
+                    txtDestinationAccount.setText("");
+                    txtAmount.setText("");
+
                     break;
-                }
-                case "Transfer": {
-                    String sourceAccountId = txtSourceAccount.getText();
-                    String destinationAccountId = txtDestinationAccount.getText();
-                    double amount = Double.parseDouble(txtAmount.getText());
+                case "Transfer":
+                    
+                    response = TransactionController.executeTransfer(sourceIdText,destinationIdText, amountText);
+                    
+                    txtSourceAccount.setText("");
+                    txtDestinationAccount.setText("");
+                    txtAmount.setText("");
 
-                    Account sourceAccount = null;
-                    Account destinationAccount = null;
-                    for (Account account : this.accounts) {
-                        if (account.getId().equals(sourceAccountId)) {
-                            sourceAccount = account;
-                        }
-                    }
-                    for (Account account : this.accounts) {
-                        if (account.getId().equals(destinationAccountId)) {
-                            destinationAccount = account;
-                        }
-                    }
-                    if (sourceAccount != null && destinationAccount != null && sourceAccount.withdraw(amount)) {
-                        destinationAccount.deposit(amount);
-
-                        this.transactions.add(new Transaction(TransactionType.TRANSFER, sourceAccount, destinationAccount, amount));
-
-                        txtSourceAccount.setText("");
-                        txtDestinationAccount.setText("");
-                        txtAmount.setText("");
-                    }
                     break;
-                }
+
                 default: {
                     txtSourceAccount.setText("");
                     txtDestinationAccount.setText("");

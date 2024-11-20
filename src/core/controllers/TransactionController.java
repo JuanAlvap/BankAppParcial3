@@ -10,6 +10,7 @@ import core.controllers.utils.Status;
 import core.models.Account;
 import core.models.Transaction;
 import core.models.User;
+import core.models.storage.TransactionStorage;
 import java.util.ArrayList;
 
 /**
@@ -21,9 +22,52 @@ public class TransactionController {
     private static ArrayList<Account> accounts;
     private static ArrayList<Transaction> transactions;
 
-    public static Response executeTransaction(String sourceAccountId, String destinationAccountId, String amount) {
+    public static Response executeTransfer(String sourceAccountId, String destinationAccountId, String amount) {
         try {
-            double amountNumber = Double.parseDouble(amount);
+            
+            try{
+                //No es numero
+                Integer.parseInt(sourceAccountId);
+            }
+            catch(NumberFormatException ex){
+                return new Response("Id must be numeric", Status.BAD_REQUEST);
+            }
+            
+            if(sourceAccountId.equals("")){
+                //String vacio
+                return new Response("Destination Account Id must not be empty", Status.BAD_REQUEST);
+            }
+            
+            if(destinationAccountId.equals("")){
+                //String vacio
+                return new Response("Destination Account Id must not be empty", Status.BAD_REQUEST);
+            }
+            
+            if(amount.equals("")){
+                return new Response("amount must not be empty", Status.BAD_REQUEST);
+            }
+            
+            
+            try{
+                //No es numero
+                Integer.parseInt(destinationAccountId);
+            }
+            catch(NumberFormatException ex){
+                return new Response("Id must be numeric", Status.BAD_REQUEST);
+            }
+            
+            double amountNumber;
+            
+            try{
+                //Verificar si es numero
+                amountNumber = Double.parseDouble(amount);
+            }
+            catch(NumberFormatException ex){
+                return new Response("Amount must be numeric", Status.BAD_REQUEST);
+            }
+            
+        
+            
             Account sourceAccount = null;
             Account destinationAccount = null;
             for (Account account : accounts) {
@@ -36,19 +80,54 @@ public class TransactionController {
                     destinationAccount = account;
                 }
             }
-            if (sourceAccount != null && destinationAccount != null && sourceAccount.withdraw(amountNumber)) {
-                transactions.add(new Transaction(TransactionType.TRANSFER, sourceAccount, destinationAccount, amountNumber));
+            boolean withdrawed = sourceAccount.withdraw(amountNumber);
+            if (destinationAccount != null && withdrawed) {
+                TransactionStorage.getInstance().addTransaction(new Transaction(TransactionType.TRANSFER, sourceAccount, destinationAccount, amountNumber));
+                return new Response("OK", Status.OK);
+            }
+            else if(!withdrawed){
+                 return new Response("insufficient funds".toUpperCase(), Status.NOT_FOUND);
+            }
+            else{
+                return new Response("ID does not match any account".toUpperCase(), Status.NOT_FOUND);
             }
         } catch (Exception ex) {
             return new Response("Unexpected Error", Status.INTERNAL_SERVER_ERROR);
         }
 
-        return null;
     }
 
     public static Response executeWithdraw(String sourceAccountId, String amount) {
         try {
-            double amountNumber = Double.parseDouble(amount);
+            
+            if(sourceAccountId.equals("")){
+                //String vacio
+                return new Response("Destination Account Id must not be empty", Status.BAD_REQUEST);
+            }
+            
+            if(amount.equals("")){
+                return new Response("amount must not be empty", Status.BAD_REQUEST);
+            }
+            
+            
+            try{
+                //No es numero
+                Integer.parseInt(sourceAccountId);
+            }
+            catch(NumberFormatException ex){
+                return new Response("Id must be numeric", Status.BAD_REQUEST);
+            }
+            
+            double amountNumber;
+            
+            try{
+                //Verificar si es numero
+                amountNumber = Double.parseDouble(amount);
+            }
+            catch(NumberFormatException ex){
+                return new Response("Amount must be numeric", Status.BAD_REQUEST);
+            }
+            
 
             Account sourceAccount = null;
             for (Account account : accounts) {
@@ -56,20 +135,54 @@ public class TransactionController {
                     sourceAccount = account;
                 }
             }
-            if (sourceAccount != null && sourceAccount.withdraw(amountNumber)) {
-                transactions.add(new Transaction(TransactionType.WITHDRAW, sourceAccount, null, amountNumber));
+            
+            if(sourceAccount  == null){
+               return new Response("ID does not match any account".toUpperCase(), Status.NOT_FOUND);
+            }
+            
+            boolean withdrawed = sourceAccount.withdraw(amountNumber);
+            if (withdrawed){
+                TransactionStorage.getInstance().addTransaction(new Transaction(TransactionType.WITHDRAW, sourceAccount, null, amountNumber));
+                return new Response("OK", Status.OK);
+            }else{
+                return new Response("insufficient funds".toUpperCase(), Status.NOT_FOUND);
             }
         } catch (Exception ex) {
-
+            return new Response("Unexpected Error", Status.INTERNAL_SERVER_ERROR);
         }
-
-        return null;
     }
 
     public static Response executeDeposit(String destinationAccountId, String amount) {
         try {
-            double amountNumber = Double.parseDouble(amount);
-
+            
+            if(destinationAccountId.equals("")){
+                //String vacio
+                return new Response("Destination Account Id must not be empty", Status.BAD_REQUEST);
+            }
+            
+            if(amount.equals("")){
+                return new Response("amount must not be empty", Status.BAD_REQUEST);
+            }
+            
+            
+            try{
+                //No es numero
+                Integer.parseInt(destinationAccountId);
+            }
+            catch(NumberFormatException ex){
+                return new Response("Id must be numeric", Status.BAD_REQUEST);
+            }
+            
+            double amountNumber;
+            
+            try{
+                //Verificar si es numero
+                amountNumber = Double.parseDouble(amount);
+            }
+            catch(NumberFormatException ex){
+                return new Response("Amount must be numeric", Status.BAD_REQUEST);
+            }
+            
             Account destinationAccount = null;
             for (Account account : accounts) {
                 if (account.getId().equals(destinationAccountId)) {
@@ -78,13 +191,14 @@ public class TransactionController {
             }
             if (destinationAccount != null) {
                 destinationAccount.deposit(amountNumber);
-                transactions.add(new Transaction(TransactionType.DEPOSIT, null, destinationAccount, amountNumber));
-
+                TransactionStorage.getInstance().addTransaction(new Transaction(TransactionType.DEPOSIT, null, destinationAccount, amountNumber));
+                return new Response("OK", Status.OK);
+            }
+            else{
+                return new Response("ID does not match any account".toUpperCase(), Status.NOT_FOUND);
             }
         } catch (Exception ex) {
-
+            return new Response("Unexpected Error", Status.INTERNAL_SERVER_ERROR);
         }
-
-        return null;
     }
 }

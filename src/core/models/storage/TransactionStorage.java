@@ -28,4 +28,10 @@ public class TransactionStorage {
         return true;
     }
 
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+    
+    
+
 }
