@@ -1,5 +1,8 @@
 package core.controllers.account;
 
+import core.controllers.account.validate.AccountExistIdValidate;
+import core.controllers.account.validate.AccountIdValidate;
+import core.controllers.account.validate.AccountInitialBalanceValidate;
 import core.controllers.user.UserController;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
@@ -16,34 +19,21 @@ public class AccountController {
 
     public static Response createAccount(String userIdText, String initialBalanceText) {
         try {
+            AccountIdValidate idValidate = new AccountIdValidate();
+            AccountInitialBalanceValidate initialBalanceValidate = new AccountInitialBalanceValidate();
+            AccountExistIdValidate existIdValidate = new AccountExistIdValidate();
             int idInt;
             double initialBalanceDouble;
-            try {
-                idInt = Integer.parseInt(userIdText);
-                if (idInt < 1) {
-                    return new Response("Id must be numeric", Status.BAD_REQUEST);
-                }
-            } catch (NumberFormatException ex) {
+
+            if (!idValidate.idValidate(userIdText)) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
 
-            try {
-                initialBalanceDouble = Double.parseDouble(initialBalanceText);
-                if (initialBalanceDouble < 0) {
-                    return new Response("initial balance must be numeric", Status.BAD_REQUEST);
-                }
-            } catch (NumberFormatException ex) {
-                return new Response("initial balance be numeric", Status.BAD_REQUEST);
+            if (!initialBalanceValidate.initialBalcanceValidate(initialBalanceText)) {
+                return new Response("initial balance must be numeric", Status.BAD_REQUEST);
             }
 
-            boolean validate = false;
-            for (User user : UserController.getUsers()) {
-                if (user.getId() == idInt) {
-                    validate = true;
-                    break;
-                }
-            }
-            if (!validate) {
+            if (!existIdValidate.existIdValidate(userIdText)) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
 
@@ -57,21 +47,21 @@ public class AccountController {
             if (selectedUser != null) {
                 boolean validateRandom = true;
                 //while (validateRandom) {
-                    Random random = new Random();
-                    int first = random.nextInt(1000);
-                    int second = random.nextInt(1000000);
-                    int third = random.nextInt(100);
+                Random random = new Random();
+                int first = random.nextInt(1000);
+                int second = random.nextInt(1000000);
+                int third = random.nextInt(100);
 
-                    accountId = String.format("%03d", first) + "-" + String.format("%06d", second) + "-" + String.format("%02d", third);
+                accountId = String.format("%03d", first) + "-" + String.format("%06d", second) + "-" + String.format("%02d", third);
 
-                    for (Account account : AccountStorage.getInstance().getAccounts()) {
-                        if (account.getId().equals(accountId)) {
-                            validateRandom = true;
-                            break;
-                        }else{
-                            validateRandom = false;
-                        }
+                for (Account account : AccountStorage.getInstance().getAccounts()) {
+                    if (account.getId().equals(accountId)) {
+                        validateRandom = true;
+                        break;
+                    } else {
+                        validateRandom = false;
                     }
+                }
                 //}
                 AccountStorage storage = AccountStorage.getInstance();
                 if (!storage.addAccount(new Account(accountId, selectedUser, initialBalanceDouble))) {
