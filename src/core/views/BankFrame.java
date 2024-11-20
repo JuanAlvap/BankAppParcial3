@@ -19,10 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import core.controllers.utils.Status;
 
-/**
- *
- * @author edangulo
- */
 public class BankFrame extends javax.swing.JFrame {
 
     private ArrayList<Account> accounts;
