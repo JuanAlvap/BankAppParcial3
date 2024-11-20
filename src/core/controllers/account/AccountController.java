@@ -3,6 +3,7 @@ package core.controllers.account;
 import core.controllers.account.validate.AccountExistIdValidate;
 import core.controllers.account.validate.AccountIdValidate;
 import core.controllers.account.validate.AccountInitialBalanceValidate;
+import core.controllers.account.validate.AccountStorageValidate;
 import core.controllers.user.UserController;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
@@ -22,8 +23,7 @@ public class AccountController {
             AccountIdValidate idValidate = new AccountIdValidate();
             AccountInitialBalanceValidate initialBalanceValidate = new AccountInitialBalanceValidate();
             AccountExistIdValidate existIdValidate = new AccountExistIdValidate();
-            int idInt;
-            double initialBalanceDouble;
+            AccountStorageValidate storageValidate = new AccountStorageValidate();
 
             if (!idValidate.idValidate(userIdText)) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
@@ -37,42 +37,15 @@ public class AccountController {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
 
-            User selectedUser = null;
-            for (User user : UserController.getUsers()) {
-                if (user.getId() == idInt && selectedUser == null) {
-                    selectedUser = user;
-                }
+            if (!storageValidate.storageValidate(initialBalanceText)) {
+                return new Response("A user with that id already exists", Status.BAD_REQUEST);
             }
-            String accountId = "";
-            if (selectedUser != null) {
-                boolean validateRandom = true;
-                //while (validateRandom) {
-                Random random = new Random();
-                int first = random.nextInt(1000);
-                int second = random.nextInt(1000000);
-                int third = random.nextInt(100);
+            return new Response("User register succesfully", Status.CREATED);
 
-                accountId = String.format("%03d", first) + "-" + String.format("%06d", second) + "-" + String.format("%02d", third);
-
-                for (Account account : AccountStorage.getInstance().getAccounts()) {
-                    if (account.getId().equals(accountId)) {
-                        validateRandom = true;
-                        break;
-                    } else {
-                        validateRandom = false;
-                    }
-                }
-                //}
-                AccountStorage storage = AccountStorage.getInstance();
-                if (!storage.addAccount(new Account(accountId, selectedUser, initialBalanceDouble))) {
-                    return new Response("A user with that id already exists", Status.BAD_REQUEST);
-                }
-                return new Response("User register succesfully", Status.CREATED);
-            }
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
+
         }
-        return null;
     }
 
     public static ArrayList<Account> getAccounts() {

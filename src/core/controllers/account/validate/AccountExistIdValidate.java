@@ -5,8 +5,6 @@
 package core.controllers.account.validate;
 
 import core.controllers.user.UserController;
-import core.controllers.utils.Response;
-import core.controllers.utils.Status;
 import core.models.User;
 
 /**
