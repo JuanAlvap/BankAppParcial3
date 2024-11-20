@@ -78,17 +78,20 @@ public class TransactionController {
                 }
             }
             for (Account account : AccountStorage.getInstance().getAccounts()) {
-                if (account.getId().equals(destinationAccount)) {
+                if (account.getId().equals(destinationAccountId)) {
                     destinationAccount = account;
                 }
             }
             boolean withdrawed = sourceAccount.withdraw(amountNumber);
             if (destinationAccount != null && withdrawed) {
+                destinationAccount.deposit(amountNumber);
                 TransactionStorage.getInstance().addTransaction(new Transaction(TransactionType.TRANSFER, sourceAccount, destinationAccount, amountNumber));
+                
                 return new Response("OK", Status.CREATED);
             } else if (!withdrawed) {
                 return new Response("insufficient funds".toUpperCase(), Status.NOT_FOUND);
             } else {
+                sourceAccount.deposit((amountNumber));
                 return new Response("ID does not match any account".toUpperCase(), Status.NOT_FOUND);
             }
         } catch (Exception ex) {
