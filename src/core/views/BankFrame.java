@@ -6,6 +6,7 @@ package core.views;
 
 import bank.TransactionType;
 import core.controllers.AccountController;
+import core.controllers.TransactionController;
 import core.controllers.UserController;
 import core.controllers.utils.Response;
 import core.models.Account;
@@ -551,6 +552,7 @@ public class BankFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
         try {
             Response response = AccountController.createAccount(txtUserID.getText(), txtInitialBalance.getText());
             if (response.getStatus() >= 500) {
@@ -562,12 +564,20 @@ public class BankFrame extends javax.swing.JFrame {
                 txtUserID.setText("");
                 txtInitialBalance.setText("");
             }
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnExecuteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteActionPerformed
+        // TODO add your handling code here:
+        String typeText = boxType.getItemAt(boxType.getSelectedIndex());
+        String sourceIdText = null;
+        String destinationIdText = txtDestinationAccount.getText();
+        String amountText =txtAmount.getText();
+        Response response = TransactionController.executeTransaction(sourceIdText, destinationIdText, amountText);
+        
         try {
             String type = boxType.getItemAt(boxType.getSelectedIndex());
             switch (type) {
@@ -672,7 +682,7 @@ public class BankFrame extends javax.swing.JFrame {
 
         listAccount.sort((obj1, obj2) -> (obj1.getId().compareTo(obj2.getId())));
 
-        for (Account account : listAccount) {
+        for (Account account : this.accounts) {
             model.addRow(new Object[]{account.getId(), account.getOwner().getId(), account.getBalance()});
         }
     }//GEN-LAST:event_btnRefreshListAccountsActionPerformed

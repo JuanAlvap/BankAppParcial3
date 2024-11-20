@@ -21,7 +21,7 @@ public class TransactionStorage {
     }
 
     public boolean addTransaction(Transaction transaction) {
-        if (transaction.getDestinationAccount() == null || transaction.getSourceAccount() == null) {
+        if (transaction.getDestinationAccount() == null && transaction.getSourceAccount() == null) {
             return false;
         }
         this.transactions.add(transaction);
