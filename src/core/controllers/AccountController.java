@@ -55,7 +55,7 @@ public class AccountController {
             String accountId = "";
             if (selectedUser != null) {
                 boolean validateRandom = true;
-                while (validateRandom) {
+                //while (validateRandom) {
                     Random random = new Random();
                     int first = random.nextInt(1000);
                     int second = random.nextInt(1000000);
@@ -71,7 +71,7 @@ public class AccountController {
                             validateRandom = false;
                         }
                     }
-                }
+                //}
                 AccountStorage storage = AccountStorage.getInstance();
                 if (!storage.addAccount(new Account(accountId, selectedUser, initialBalanceDouble))) {
                     return new Response("A user with that id already exists", Status.BAD_REQUEST);
