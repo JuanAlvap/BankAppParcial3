@@ -551,7 +551,6 @@ public class BankFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
         try {
             Response response = AccountController.createAccount(txtUserID.getText(), txtInitialBalance.getText());
             if (response.getStatus() >= 500) {
@@ -563,14 +562,12 @@ public class BankFrame extends javax.swing.JFrame {
                 txtUserID.setText("");
                 txtInitialBalance.setText("");
             }
-
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnExecuteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteActionPerformed
-        // TODO add your handling code here:
         try {
             String type = boxType.getItemAt(boxType.getSelectedIndex());
             switch (type) {
