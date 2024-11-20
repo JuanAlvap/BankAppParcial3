@@ -5,7 +5,9 @@
         <group>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/models/storage/UserStorage.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/models/storage/AccountStorage.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/main/Main.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/UserController.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/TransactionController.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/views/BankFrame.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/bank/TransactionType.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/models/Account.java</file>

@@ -1,5 +1,6 @@
-package core.controllers;
+package core.controllers.account;
 
+import core.controllers.user.UserController;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.Account;
