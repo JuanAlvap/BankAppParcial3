@@ -4,7 +4,7 @@
  */
 package core.views;
 
-import bank.TransactionType;
+import core.models.TransactionType;
 import core.controllers.account.AccountController;
 import core.controllers.transaction.TransactionController;
 import core.controllers.user.UserController;
@@ -580,7 +580,7 @@ public class BankFrame extends javax.swing.JFrame {
             switch (type) {
                 case "Deposit":
 
-                    response = TransactionController.executeDeposit(destinationIdText, amountText);
+                    response = TransactionController.executeDeposit(sourceIdText,destinationIdText, amountText);
 
                     if (response.getStatus() != Status.CREATED) {
                         JOptionPane.showMessageDialog(null, response.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -592,7 +592,7 @@ public class BankFrame extends javax.swing.JFrame {
 
                 case "Withdraw":
 
-                    response = TransactionController.executeWithdraw(sourceIdText, amountText);
+                    response = TransactionController.executeWithdraw(sourceIdText, destinationIdText, amountText);
 
                     if (response.getStatus() != Status.CREATED) {
                         JOptionPane.showMessageDialog(null, response.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);

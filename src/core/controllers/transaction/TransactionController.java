@@ -4,7 +4,8 @@
  */
 package core.controllers.transaction;
 
-import bank.TransactionType;
+import core.models.TransactionType;
+import core.controllers.transaction.validate.EmptyValidate;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.Account;
@@ -32,40 +33,26 @@ public class TransactionController {
     }
 
     public static Response executeTransfer(String sourceAccountId, String destinationAccountId, String amount) {
+        EmptyValidate emptyValidate = new EmptyValidate();
         try {
 
-            try {
-                //No es numero
-
-            } catch (NumberFormatException ex) {
-                return new Response("Id must be numeric", Status.BAD_REQUEST);
+            if (!emptyValidate.isEmpty(sourceAccountId)) {
+                //String vacio
+                return new Response("Source Account Id must not be empty", Status.BAD_REQUEST);
             }
 
-            if (sourceAccountId.equals("")) {
+            if (!emptyValidate.isEmpty(destinationAccountId)) {
                 //String vacio
                 return new Response("Destination Account Id must not be empty", Status.BAD_REQUEST);
-            }
-
-            if (destinationAccountId.equals("")) {
-                //String vacio
-                return new Response("Destination Account Id must not be empty", Status.BAD_REQUEST);
-            }
-
-            if (amount.equals("")) {
-                return new Response("amount must not be empty", Status.BAD_REQUEST);
-            }
-
-            try {
-                //No es numero
-            } catch (NumberFormatException ex) {
-                return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
 
             double amountNumber;
 
             try {
-                //Verificar si es numero
                 amountNumber = Double.parseDouble(amount);
+                if (amountNumber < 0) {
+                    return new Response("Amount must be numeric", Status.BAD_REQUEST);
+                }
             } catch (NumberFormatException ex) {
                 return new Response("Amount must be numeric", Status.BAD_REQUEST);
             }
@@ -86,7 +73,7 @@ public class TransactionController {
             if (destinationAccount != null && withdrawed) {
                 destinationAccount.deposit(amountNumber);
                 TransactionStorage.getInstance().addTransaction(new Transaction(TransactionType.TRANSFER, sourceAccount, destinationAccount, amountNumber));
-                
+
                 return new Response("OK", Status.CREATED);
             } else if (!withdrawed) {
                 return new Response("insufficient funds".toUpperCase(), Status.NOT_FOUND);
@@ -100,23 +87,17 @@ public class TransactionController {
 
     }
 
-    public static Response executeWithdraw(String sourceAccountId, String amount) {
+    public static Response executeWithdraw(String sourceAccountId, String destinationAccountId, String amount) {
+        EmptyValidate emptyValidate = new EmptyValidate();
         try {
 
-            if (sourceAccountId.equals("")) {
+            if (!emptyValidate.isEmpty(sourceAccountId)) {
                 //String vacio
-                return new Response("Destination Account Id must not be empty", Status.BAD_REQUEST);
+                return new Response("Source Account Id must not be empty", Status.BAD_REQUEST);
             }
 
-            if (amount.equals("")) {
-                return new Response("amount must not be empty", Status.BAD_REQUEST);
-            }
-
-            try {
-                //No es numero
-
-            } catch (NumberFormatException ex) {
-                return new Response("Id must be numeric", Status.BAD_REQUEST);
+            if (emptyValidate.isEmpty(destinationAccountId)) {
+                return new Response("Destination Account Id not valid", Status.BAD_REQUEST);
             }
 
             double amountNumber;
@@ -124,6 +105,9 @@ public class TransactionController {
             try {
                 //Verificar si es numero
                 amountNumber = Double.parseDouble(amount);
+                if (amountNumber < 0) {
+                    return new Response("Amount must be numeric", Status.BAD_REQUEST);
+                }
             } catch (NumberFormatException ex) {
                 return new Response("Amount must be numeric", Status.BAD_REQUEST);
             }
@@ -147,28 +131,22 @@ public class TransactionController {
                 return new Response("insufficient funds".toUpperCase(), Status.NOT_FOUND);
             }
         } catch (Exception ex) {
-            System.out.println("ERROR: "+ ex);
+            System.out.println("ERROR: " + ex);
             return new Response("Unexpected Error", Status.INTERNAL_SERVER_ERROR);
         }
     }
 
-    public static Response executeDeposit(String destinationAccountId, String amount) {
+    public static Response executeDeposit(String sourceAccountId, String destinationAccountId, String amount) {
+        EmptyValidate emptyValidate = new EmptyValidate();
         try {
 
-            if (destinationAccountId.equals("")) {
+            if (!emptyValidate.isEmpty(sourceAccountId)) {
                 //String vacio
+                return new Response("Source Account Id not valid", Status.BAD_REQUEST);
+            }
+
+            if (!emptyValidate.isEmpty(destinationAccountId)) {
                 return new Response("Destination Account Id must not be empty", Status.BAD_REQUEST);
-            }
-
-            if (amount.equals("")) {
-                return new Response("amount must not be empty", Status.BAD_REQUEST);
-            }
-
-            try {
-                //No es numero
-
-            } catch (NumberFormatException ex) {
-                return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
 
             double amountNumber;
@@ -176,6 +154,9 @@ public class TransactionController {
             try {
                 //Verificar si es numero
                 amountNumber = Double.parseDouble(amount);
+                if (amountNumber < 0) {
+                    return new Response("Amount must be numeric", Status.BAD_REQUEST);
+                }
             } catch (NumberFormatException ex) {
                 return new Response("Amount must be numeric", Status.BAD_REQUEST);
             }
