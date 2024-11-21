@@ -19,7 +19,7 @@ import java.util.Collections;
  *
  * @author cande
  */
-public class TransactionController {
+public class TransactionController extends BaseController {
 
     public static ArrayList<Transaction> getSortedTransactions() {
         ArrayList<Transaction> sortedClone = (ArrayList<Transaction>) getTransactions().clone();
