@@ -3,10 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/transaction/validate/EmptyValidate.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/user/validate/UserAgeValidate.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/TransactionController.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/BaseController.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/user/validate/UserLastNameValidate.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/user/validate/UserStorageValidate.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/user/UserController.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/account/AccountController.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/user/validate/UserFirstNameValidate.java</file>
+=======
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/account/validate/AccountCreateIdAccountValidate.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/user/UserController.java</file>
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/account/validate/AccountIdValidate.java</file>
+>>>>>>> 26993c75a3ba15ab500673dba349febf6de3d3e5
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/views/BankFrame.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/account/AccountController.java</file>
+<<<<<<< HEAD
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/transaction/TransactionController.java</file>
+=======
+            <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/account/validate/AccountStorageValidate.java</file>
+>>>>>>> 752f8e954d3e18084f3f34d1f8ba571fbdbcae48
+>>>>>>> 26993c75a3ba15ab500673dba349febf6de3d3e5
         </group>
     </open-files>
 </project-private>

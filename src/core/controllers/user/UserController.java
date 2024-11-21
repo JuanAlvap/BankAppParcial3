@@ -1,5 +1,6 @@
 package core.controllers.user;
 
+import core.controllers.BaseController;
 import core.controllers.user.validate.UserAgeValidate;
 import core.controllers.user.validate.UserFirstNameValidate;
 import core.controllers.user.validate.UserIdValidate;
@@ -11,7 +12,7 @@ import core.models.User;
 import core.models.storage.UserStorage;
 import java.util.ArrayList;
 
-public class UserController {
+public class UserController extends BaseController {
 
     public UserController() {
     }
