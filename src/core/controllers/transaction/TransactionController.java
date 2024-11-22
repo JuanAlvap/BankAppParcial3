@@ -5,22 +5,15 @@
 package core.controllers.transaction;
 
 import core.controllers.BaseController;
-<<<<<<< HEAD
-import core.models.TransactionType;
-=======
 import core.controllers.Validator;
 import core.controllers.account.validate.PositiveNumberValidate;
->>>>>>> 182266cb55de5e7ab129f231c4d8e327f3879b6d
 import core.controllers.transaction.validate.EmptyValidate;
 import core.controllers.user.validate.StringNotEmptyValidate;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.Account;
 import core.models.Transaction;
-<<<<<<< HEAD
-=======
 import core.models.TransactionType;
->>>>>>> 182266cb55de5e7ab129f231c4d8e327f3879b6d
 import core.models.storage.AccountStorage;
 import core.models.storage.TransactionStorage;
 import java.util.ArrayList;
