@@ -1,9 +1,11 @@
 package core.controllers.account;
 
+import core.controllers.Validator;
 import core.controllers.account.validate.AccountExistIdValidate;
-import core.controllers.account.validate.AccountIdValidate;
-import core.controllers.account.validate.AccountInitialBalanceValidate;
+
+import core.controllers.account.validate.PositiveNumberValidate;
 import core.controllers.account.validate.AccountStorageValidate;
+import core.controllers.user.validate.IdValidate;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.Account;
@@ -17,20 +19,21 @@ public class AccountController {
 
     public static Response createAccount(String userIdText, String initialBalanceText) {
         try {
-            AccountIdValidate idValidate = new AccountIdValidate();
-            AccountInitialBalanceValidate initialBalanceValidate = new AccountInitialBalanceValidate();
+            Validator validator = new Validator();
+            IdValidate idValidate = new IdValidate();
+            PositiveNumberValidate initialBalanceValidate = new PositiveNumberValidate();
             AccountExistIdValidate existIdValidate = new AccountExistIdValidate();
             AccountStorageValidate storageValidate = new AccountStorageValidate();
 
-            if (!idValidate.idValidate(userIdText)) {
+            if (!validator.validate(idValidate,userIdText)) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
 
-            if (!initialBalanceValidate.initialBalcanceValidate(initialBalanceText)) {
-                return new Response("initial balance must be numeric", Status.BAD_REQUEST);
+            if (!validator.validate(initialBalanceValidate,initialBalanceText)) {
+                return new Response("Initial balance must be numeric", Status.BAD_REQUEST);
             }
 
-            if (!existIdValidate.existIdValidate(userIdText)) {
+            if (!validator.validate(existIdValidate,userIdText)) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
 

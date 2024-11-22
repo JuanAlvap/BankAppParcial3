@@ -2,10 +2,26 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/transaction/validate/EmptyValidate.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/views/BankFrame.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/account/AccountController.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/transaction/TransactionController.java</file>
+=======
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/Validator.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/account/validate/AccountExistIdValidate.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/user/UserController.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/account/validate/AccountStorageValidate.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/account/AccountController.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/transaction/TransactionController.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/user/validate/StringNotEmptyValidate.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/user/validate/IdValidate.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/user/validate/UserAgeValidate.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/user/validate/UserStorageValidate.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/account/validate/AccountCreateIdAccountValidate.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/account/validate/PositiveNumberValidate.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/StringValidation.java</file>
+>>>>>>> 182266cb55de5e7ab129f231c4d8e327f3879b6d
         </group>
     </open-files>
 </project-private>

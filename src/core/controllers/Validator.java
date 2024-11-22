@@ -4,14 +4,14 @@
  */
 package core.controllers;
 
-import core.controllers.utils.Response;
-
 /**
  *
  * @author cande
  */
-public abstract class BaseController{
-    
+public class Validator {
+    public boolean validate(StringValidation v, String text){
+        return v.validate(text);
+    }
     
     
 }

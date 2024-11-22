@@ -1,11 +1,14 @@
 package core.controllers.user.validate;
 
-public class UserIdValidate {
+import core.controllers.StringValidation;
 
-    public UserIdValidate() {
+public class IdValidate implements StringValidation {
+
+    public IdValidate() {
     }
     
-    public boolean idValidate(String id){
+    @Override
+    public boolean validate(String id){
         try{
             int idInt = Integer.parseInt(id);
                 if(idInt<0 || idInt>999999999){

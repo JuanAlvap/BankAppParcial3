@@ -1,11 +1,14 @@
 package core.controllers.account.validate;
 
-public class AccountInitialBalanceValidate {
+import core.controllers.StringValidation;
 
-    public AccountInitialBalanceValidate() {
+public class PositiveNumberValidate implements StringValidation {
+
+    public PositiveNumberValidate() {
     }
 
-    public boolean initialBalcanceValidate(String initialBalance) {
+    @Override
+    public boolean validate(String initialBalance) {
         try {
             double initialBalanceDouble;
             initialBalanceDouble = Double.parseDouble(initialBalance);

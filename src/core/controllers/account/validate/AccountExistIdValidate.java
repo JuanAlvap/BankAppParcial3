@@ -1,14 +1,16 @@
 package core.controllers.account.validate;
 
+import core.controllers.StringValidation;
 import core.controllers.user.UserController;
 import core.models.User;
 
-public class AccountExistIdValidate {
+public class AccountExistIdValidate implements StringValidation {
 
     public AccountExistIdValidate() {
     }
     
-    public boolean existIdValidate(String id){
+    @Override
+    public boolean validate(String id){
         int idInt = Integer.parseInt(id);
         boolean validate = false;
             for (User user : UserController.getUsers()) {
