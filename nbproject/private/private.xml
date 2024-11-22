@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/transaction/TransactionExecuteWithdraw.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/account/validate/PositiveNumberValidate.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/transaction/TransactionExecuteTransfer.java</file>
@@ -12,6 +13,11 @@
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/views/BankFrame.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/transaction/TransactionExecuteDeposit.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/transaction/TransactionController.java</file>
+=======
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/models/TransactionType.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/models/Transaction.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/transaction/TransactionController.java</file>
+>>>>>>> c78793dca49c2bf7d89049c4efdce72acf429418
         </group>
     </open-files>
 </project-private>

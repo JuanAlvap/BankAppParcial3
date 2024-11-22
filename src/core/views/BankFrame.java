@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package core.views;
-
-import core.models.TransactionType;
+import core.controllers.transaction.TransactionType;
+//import core.models.TransactionType;
 import core.controllers.account.AccountController;
 import core.controllers.transaction.TransactionController;
+import core.controllers.transaction.TransactionExecuteDeposit;
 import core.controllers.user.UserController;
 import core.controllers.utils.Response;
 import core.models.Account;
@@ -569,8 +570,10 @@ public class BankFrame extends javax.swing.JFrame {
 
     private void btnExecuteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteActionPerformed
         // TODO add your handling code here:
+
+        
         try {
-            Response response = TransactionController.exexute(txtSourceAccount.getText(), txtDestinationAccount.getText(), txtAmount.getText(), boxType.getItemAt(boxType.getSelectedIndex()));
+            Response response = TransactionController.execute(txtSourceAccount.getText(), txtDestinationAccount.getText(), txtAmount.getText(), boxType.getItemAt(boxType.getSelectedIndex()));
             if (response.getStatus() >= 500) {
                 JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
             } else if (response.getStatus() >= 400) {
@@ -619,7 +622,7 @@ public class BankFrame extends javax.swing.JFrame {
         model.setRowCount(0);
 
         for (Transaction transaction : TransactionController.getSortedTransactions()) {
-            model.addRow(new Object[]{transaction.getType().name(), (transaction.getSourceAccount() != null ? transaction.getSourceAccount().getId() : "None"), (transaction.getDestinationAccount() != null ? transaction.getDestinationAccount().getId() : "None"), transaction.getAmount()});
+            model.addRow(new Object[]{transaction.getType(), (transaction.getSourceAccount() != null ? transaction.getSourceAccount().getId() : "None"), (transaction.getDestinationAccount() != null ? transaction.getDestinationAccount().getId() : "None"), transaction.getAmount()});
         }
     }//GEN-LAST:event_btnListTransactionsActionPerformed
 

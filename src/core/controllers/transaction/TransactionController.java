@@ -13,7 +13,7 @@ import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.Account;
 import core.models.Transaction;
-import core.models.TransactionType;
+//import core.models.TransactionType;
 import core.models.storage.AccountStorage;
 import core.models.storage.TransactionStorage;
 import java.util.ArrayList;
@@ -35,23 +35,20 @@ public class TransactionController extends BaseController {
         return TransactionStorage.getInstance().getTransactions();
     }
 
-    public static Response exexute(String sourceAccountId, String destinationAccountId, String amount, String type) {
-        TransactionExecuteTransfer executeTransfer = new TransactionExecuteTransfer();
-        TransactionExecuteWithdraw executeWithdraw = new TransactionExecuteWithdraw();
-        TransactionExecuteDeposit executeDeposit = new TransactionExecuteDeposit();
-
-        Response response = null;
-        switch (type) {
-            case "Deposit":
-                response = executeDeposit.executeDeposit(sourceAccountId, destinationAccountId, amount);
-                break;
-            case "Withdraw":
-                response = executeWithdraw.executeWithdraw(sourceAccountId, destinationAccountId, amount);
-                break;
-            case "Transfer":
-                response = executeTransfer.executeTransfer(sourceAccountId, destinationAccountId, amount);
-                break;
+    public static Response execute(String sourceAccountId, String destinationAccountId, String amount, String typeOfTransaction) {
+        TransactionType type = null;
+        switch(typeOfTransaction){
+            case "Deposit" -> type = new TransactionExecuteDeposit();
+            case "Withdraw" -> type = new TransactionExecuteWithdraw();
+            case "Transfer" -> type = new TransactionExecuteTransfer();
+            default -> {
+                return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
+            }
         }
+        
+        Response response = type.execute(sourceAccountId, destinationAccountId, amount);
         return response;
+        }
+        
     }
-}
+

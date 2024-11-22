@@ -7,17 +7,21 @@ import core.controllers.user.validate.StringNotEmptyValidate;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.Account;
+import core.models.Deposit;
 import core.models.Transaction;
-import core.models.TransactionType;
+import core.models.Withdraw;
+//import core.models.TransactionType;
 import core.models.storage.AccountStorage;
 import core.models.storage.TransactionStorage;
 
-public class TransactionExecuteTransfer {
+public class TransactionExecuteTransfer implements TransactionType {
 
     public TransactionExecuteTransfer() {
     }
     
-    public Response executeTransfer(String sourceAccountId, String destinationAccountId, String amount) {
+    
+    @Override
+    public Response execute(String sourceAccountId, String destinationAccountId, String amount) {
         EmptyValidate emptyValidate = new EmptyValidate();
         try {
             Validator validator = new Validator();
@@ -53,18 +57,18 @@ public class TransactionExecuteTransfer {
             if(sourceAccount == null){
                 return new Response("ID does not match any source account".toUpperCase(), Status.NOT_FOUND);
             }else{
-                withdrawed = sourceAccount.withdraw(amountNumber);
+                withdrawed = sourceAccount.realizeMovement(new Withdraw(),amountNumber);
             }
             
             if (destinationAccount != null && withdrawed) {
-                destinationAccount.deposit(amountNumber);
-                TransactionStorage.getInstance().addTransaction(new Transaction(TransactionType.TRANSFER, sourceAccount, destinationAccount, amountNumber));
+                destinationAccount.realizeMovement(new Deposit(),amountNumber);
+                TransactionStorage.getInstance().addTransaction(new Transaction("TRANSFER",sourceAccount, destinationAccount, amountNumber));
 
                 return new Response("OK", Status.CREATED);
             } else if (!withdrawed) {
                 return new Response("insufficient funds".toUpperCase(), Status.NOT_FOUND);
             } else {
-                sourceAccount.deposit((amountNumber));
+                sourceAccount.realizeMovement(new Deposit(),amountNumber);
                 return new Response("ID does not match any account".toUpperCase(), Status.NOT_FOUND);
             }
         } catch (Exception ex) {
