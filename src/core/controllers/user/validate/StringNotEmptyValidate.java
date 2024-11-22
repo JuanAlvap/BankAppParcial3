@@ -7,8 +7,8 @@ import core.controllers.StringValidation;
 public class StringNotEmptyValidate implements StringValidation {
 
     @Override
-    public boolean validate(String firstname) {
-        return !firstname.equals("");
+    public boolean validate(String text) {
+        return !text.equals("");
     }
 
 }

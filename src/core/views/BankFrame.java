@@ -569,61 +569,19 @@ public class BankFrame extends javax.swing.JFrame {
 
     private void btnExecuteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteActionPerformed
         // TODO add your handling code here:
-        String typeText = boxType.getItemAt(boxType.getSelectedIndex());
-        String sourceIdText = txtSourceAccount.getText();
-        String destinationIdText = txtDestinationAccount.getText();
-        String amountText = txtAmount.getText();
-        Response response;
-        //Response response = TransactionController.executeTransaction(sourceIdText, destinationIdText, amountText);
         try {
-            String type = boxType.getItemAt(boxType.getSelectedIndex());
-            switch (type) {
-                case "Deposit":
-
-                    response = TransactionController.executeDeposit(sourceIdText,destinationIdText, amountText);
-
-                    if (response.getStatus() != Status.CREATED) {
-                        JOptionPane.showMessageDialog(null, response.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-                    }
-                    txtSourceAccount.setText("");
-                    txtDestinationAccount.setText("");
-                    txtAmount.setText("");
-                    break;
-
-                case "Withdraw":
-
-                    response = TransactionController.executeWithdraw(sourceIdText, destinationIdText, amountText);
-
-                    if (response.getStatus() != Status.CREATED) {
-                        JOptionPane.showMessageDialog(null, response.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                    txtSourceAccount.setText("");
-                    txtDestinationAccount.setText("");
-                    txtAmount.setText("");
-
-                    break;
-                case "Transfer":
-                    
-                    response = TransactionController.executeTransfer(sourceIdText,destinationIdText, amountText);
-                    
-                    if (response.getStatus() != Status.CREATED) {
-                        JOptionPane.showMessageDialog(null, response.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-                    }
-                    
-                    txtSourceAccount.setText("");
-                    txtDestinationAccount.setText("");
-                    txtAmount.setText("");
-
-                    break;
-
-                default: {
-                    txtSourceAccount.setText("");
-                    txtDestinationAccount.setText("");
-                    txtAmount.setText("");
-                    break;
-                }
+            Response response = TransactionController.exexute(txtSourceAccount.getText(), txtDestinationAccount.getText(), txtAmount.getText(), boxType.getItemAt(boxType.getSelectedIndex()));
+            if (response.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+            } else if (response.getStatus() >= 400) {
+                JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, response.getMessage() + "\nPerson fullname: " + response.getObject(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+                txtAmount.setText("");
+                txtDestinationAccount.setText("");
+                txtSourceAccount.setText("");
             }
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -659,7 +617,7 @@ public class BankFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tableListTransactions.getModel();
         model.setRowCount(0);
-        
+
         for (Transaction transaction : TransactionController.getSortedTransactions()) {
             model.addRow(new Object[]{transaction.getType().name(), (transaction.getSourceAccount() != null ? transaction.getSourceAccount().getId() : "None"), (transaction.getDestinationAccount() != null ? transaction.getDestinationAccount().getId() : "None"), transaction.getAmount()});
         }

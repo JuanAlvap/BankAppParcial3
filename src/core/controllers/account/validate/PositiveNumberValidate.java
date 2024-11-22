@@ -8,11 +8,11 @@ public class PositiveNumberValidate implements StringValidation {
     }
 
     @Override
-    public boolean validate(String initialBalance) {
+    public boolean validate(String num) {
         try {
-            double initialBalanceDouble;
-            initialBalanceDouble = Double.parseDouble(initialBalance);
-            if (initialBalanceDouble < 0) {
+            double numero;
+            numero = Double.parseDouble(num);
+            if (numero < 0) {
                 return false;
             }
         } catch (NumberFormatException ex) {
