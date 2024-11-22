@@ -4,13 +4,13 @@
  */
 package core.controllers.transaction;
 
+import core.controllers.BaseController;
 import core.models.TransactionType;
 import core.controllers.transaction.validate.EmptyValidate;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.Account;
 import core.models.Transaction;
-import core.models.User;
 import core.models.storage.AccountStorage;
 import core.models.storage.TransactionStorage;
 import java.util.ArrayList;
