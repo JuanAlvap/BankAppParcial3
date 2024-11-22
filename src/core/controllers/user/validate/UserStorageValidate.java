@@ -7,7 +7,7 @@ public class UserStorageValidate{
 
     public UserStorageValidate() {
     }
-    //Este validation es diferente. Se arreglara despues
+    //Este validation es diferente. Se arreglara despuesS
     public boolean validate(String idText, String firstnameText, String lastnameText, String ageText) {
         int idInt = Integer.parseInt(idText);
         int ageInt = Integer.parseInt(ageText);
