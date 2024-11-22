@@ -8,16 +8,18 @@ import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.Account;
 import core.models.Transaction;
-import core.models.TransactionType;
+//import core.models.TransactionType;
 import core.models.storage.AccountStorage;
 import core.models.storage.TransactionStorage;
 
-public class TransactionExecuteTransfer {
+public class TransactionExecuteTransfer implements TransactionType {
 
     public TransactionExecuteTransfer() {
     }
     
-    public Response executeTransfer(String sourceAccountId, String destinationAccountId, String amount) {
+    
+    @Override
+    public Response execute(String sourceAccountId, String destinationAccountId, String amount) {
         EmptyValidate emptyValidate = new EmptyValidate();
         try {
             Validator validator = new Validator();
@@ -58,7 +60,7 @@ public class TransactionExecuteTransfer {
             
             if (destinationAccount != null && withdrawed) {
                 destinationAccount.deposit(amountNumber);
-                TransactionStorage.getInstance().addTransaction(new Transaction(TransactionType.TRANSFER, sourceAccount, destinationAccount, amountNumber));
+                TransactionStorage.getInstance().addTransaction(new Transaction(sourceAccount, destinationAccount, amountNumber));
 
                 return new Response("OK", Status.CREATED);
             } else if (!withdrawed) {

@@ -7,16 +7,17 @@ import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.Account;
 import core.models.Transaction;
-import core.models.TransactionType;
+//import core.models.TransactionType;
 import core.models.storage.AccountStorage;
 import core.models.storage.TransactionStorage;
 
-public class TransactionExecuteDeposit {
+public class TransactionExecuteDeposit implements TransactionType {
 
     public TransactionExecuteDeposit() {
     }
-
-    public Response executeDeposit(String sourceAccountId, String destinationAccountId, String amount) {
+    
+    @Override
+    public Response execute(String sourceAccountId, String destinationAccountId, String amount) {
         Validator validator = new Validator();
         try {
 
@@ -45,7 +46,7 @@ public class TransactionExecuteDeposit {
 
             if (destinationAccount != null) {
                 destinationAccount.deposit(amountNumber);
-                TransactionStorage.getInstance().addTransaction(new Transaction(TransactionType.DEPOSIT, null, destinationAccount, amountNumber));
+                TransactionStorage.getInstance().addTransaction(new Transaction( null, destinationAccount, amountNumber));
                 return new Response("OK", Status.CREATED);
             } else {
                 return new Response("ID does not match any account".toUpperCase(), Status.NOT_FOUND);
