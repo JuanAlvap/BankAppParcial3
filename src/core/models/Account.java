@@ -42,16 +42,13 @@ public class Account {
         return balance;
     }
     
-    public void deposit(double amount) {
-        this.balance += amount;
+    public void setBalance(double amount){
+        this.balance = amount;
     }
     
-    public boolean withdraw(double amount) {
-        if (amount > this.balance) {
-            return false;
-        }
-        this.balance -= amount;
-        return true;
+    public boolean realizeMovement(Movement m, double amount){
+        return m.execute(this, amount);
     }
+   
     
 }

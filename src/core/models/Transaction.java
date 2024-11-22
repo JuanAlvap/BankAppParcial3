@@ -12,19 +12,19 @@ import core.models.Account;
  */
 public class Transaction {
     
-    //private TransactionType type;
+    private String type;
     private Account sourceAccount;
     private Account destinationAccount;
     private double amount;
     
-    public Transaction(Account sourceAccount, Account destinationAccount, double amount) {
-        //this.type = type;
+    public Transaction(String type,Account sourceAccount, Account destinationAccount, double amount) {
+        this.type = type;
         this.sourceAccount = sourceAccount;
         this.destinationAccount = destinationAccount;
         this.amount = amount;
     }
 
-    public TransactionType getType() {
+    public String getType() {
         return type;
     }
 

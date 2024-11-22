@@ -35,13 +35,18 @@ public class TransactionController extends BaseController {
         return TransactionStorage.getInstance().getTransactions();
     }
 
-    public static Response execute(String sourceAccountId, String destinationAccountId, String amount, TransactionType type) {
-        TransactionExecuteTransfer executeTransfer = new TransactionExecuteTransfer();
-        TransactionExecuteWithdraw executeWithdraw = new TransactionExecuteWithdraw();
-        TransactionExecuteDeposit executeDeposit = new TransactionExecuteDeposit();
-
-        Response response = null;
-        response = type.execute(sourceAccountId, destinationAccountId, amount);
+    public static Response execute(String sourceAccountId, String destinationAccountId, String amount, String typeOfTransaction) {
+        TransactionType type = null;
+        switch(typeOfTransaction){
+            case "Deposit" -> type = new TransactionExecuteDeposit();
+            case "Withdraw" -> type = new TransactionExecuteWithdraw();
+            case "Transfer" -> type = new TransactionExecuteTransfer();
+            default -> {
+                return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
+            }
+        }
+        
+        Response response = type.execute(sourceAccountId, destinationAccountId, amount);
         return response;
         }
         
