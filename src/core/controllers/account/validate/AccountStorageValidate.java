@@ -6,6 +6,8 @@ import core.models.User;
 import core.models.storage.AccountStorage;
 
 public class AccountStorageValidate {
+    
+    //Account Storage Validate tmb es diferente
 
     public AccountStorageValidate() {
     }

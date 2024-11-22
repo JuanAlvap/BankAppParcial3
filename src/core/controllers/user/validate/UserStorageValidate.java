@@ -3,12 +3,12 @@ package core.controllers.user.validate;
 import core.models.User;
 import core.models.storage.UserStorage;
 
-public class UserStorageValidate {
+public class UserStorageValidate{
 
     public UserStorageValidate() {
     }
-
-    public boolean storageValidate(String idText, String firstnameText, String lastnameText, String ageText) {
+    //Este validation es diferente. Se arreglara despues
+    public boolean validate(String idText, String firstnameText, String lastnameText, String ageText) {
         int idInt = Integer.parseInt(idText);
         int ageInt = Integer.parseInt(ageText);
         UserStorage storage = UserStorage.getInstance();

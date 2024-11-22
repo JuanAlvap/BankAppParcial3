@@ -9,6 +9,8 @@ public class AccountCreateIdAccountValidate {
     public AccountCreateIdAccountValidate() {
     }
 
+    //Esta clase no es de validaciones, es de generacion de ID
+    
     public String createIdAccountValidate() {
         String accountId = "";
         boolean validateRandom = true;

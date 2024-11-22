@@ -1,11 +1,16 @@
 package core.controllers.user.validate;
 
-public class UserAgeValidate {
+import core.controllers.StringValidation;
+
+
+
+public class UserAgeValidate implements StringValidation {
 
     public UserAgeValidate() {
     }
 
-    public boolean ageValidate(String age) {
+    @Override
+    public boolean validate(String age) {
         try {
             int ageInt = Integer.parseInt(age);
             if (ageInt < 18) {

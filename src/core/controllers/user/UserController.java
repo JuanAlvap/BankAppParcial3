@@ -1,10 +1,10 @@
 package core.controllers.user;
 
 import core.controllers.BaseController;
+import core.controllers.Validator;
+import core.controllers.user.validate.StringNotEmptyValidate;
 import core.controllers.user.validate.UserAgeValidate;
-import core.controllers.user.validate.UserFirstNameValidate;
-import core.controllers.user.validate.UserIdValidate;
-import core.controllers.user.validate.UserLastNameValidate;
+import core.controllers.user.validate.IdValidate;
 import core.controllers.user.validate.UserStorageValidate;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
@@ -20,29 +20,30 @@ public class UserController extends BaseController {
     public static Response registerUser(String idText, String firstnameText, String lastnameText, String ageText) {
 
         try {
-            UserIdValidate idValidate = new UserIdValidate();
+            Validator validator = new Validator();
+            IdValidate idValidate = new IdValidate();
             UserAgeValidate ageValidate = new UserAgeValidate();
-            UserFirstNameValidate firstnameValidate = new UserFirstNameValidate();
-            UserLastNameValidate lastnameValidate = new UserLastNameValidate();
+            StringNotEmptyValidate notEmptyValidate = new StringNotEmptyValidate();
             UserStorageValidate storageValidate = new UserStorageValidate();
 
-            if (!idValidate.idValidate(idText)) {
+            if (!validator.validate(idValidate,idText)) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
 
-            if (!firstnameValidate.firstnameValidate(firstnameText)) {
+            if (!validator.validate(notEmptyValidate,firstnameText)) {
                 return new Response("Firstname must be not empty", Status.BAD_REQUEST);
             }
 
-            if (!lastnameValidate.lastnameValidate(lastnameText)) {
+            if (!validator.validate(notEmptyValidate,lastnameText)) {
                 return new Response("Lastname must be not empty", Status.BAD_REQUEST);
             }
 
-            if (!ageValidate.ageValidate(ageText)) {
+            if (!validator.validate(ageValidate,ageText)) {
                 return new Response("Age must be numeric", Status.BAD_REQUEST);
             }
 
-            if (!storageValidate.storageValidate(idText, firstnameText, lastnameText, ageText)) {
+            //Esta validacion si es diferente. Se arreglara despues.
+            if (!storageValidate.validate(idText, firstnameText, lastnameText, ageText)) {
                 return new Response("A user with that id already exists", Status.BAD_REQUEST);
             }
 
