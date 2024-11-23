@@ -12,7 +12,7 @@ public class AccountStorageValidate {
     public AccountStorageValidate() {
     }
 
-    public boolean storageValidate(String id, String initialBalance) {
+    public boolean validate(String id, String initialBalance) {
         int idInt = Integer.parseInt(id);
         double initialBalanceDouble = Double.parseDouble(initialBalance);
         AccountCreateIdAccountValidate createIdAccountValidate = new AccountCreateIdAccountValidate();

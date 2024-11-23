@@ -22,12 +22,10 @@ public class TransactionExecuteWithdraw extends BaseService implements Transacti
         try {
 
             if (!validator.validate(new StringNotEmptyValidate(), sourceAccountId)) {
-                //String vacio
                 return new Response("Source Account Id must not be empty", Status.BAD_REQUEST);
             }
 
             if (validator.validate(new StringNotEmptyValidate(), destinationAccountId)) {
-                //String vacio
                 return new Response("Destination Account Id must be empty", Status.BAD_REQUEST);
             }
 

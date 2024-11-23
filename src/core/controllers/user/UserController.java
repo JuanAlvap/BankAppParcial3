@@ -1,6 +1,5 @@
 package core.controllers.user;
 
-import core.controllers.BaseController;
 import core.controllers.Validator;
 import core.controllers.user.validate.StringNotEmptyValidate;
 import core.controllers.user.validate.UserAgeValidate;
@@ -12,7 +11,7 @@ import core.models.User;
 import core.models.storage.UserStorage;
 import java.util.ArrayList;
 
-public class UserController extends BaseController {
+public class UserController{
 
     public UserController() {
     }
@@ -42,8 +41,7 @@ public class UserController extends BaseController {
                 return new Response("Age must be numeric", Status.BAD_REQUEST);
             }
 
-            //Esta validacion si es diferente. Se arreglara despues.
-            if (!storageValidate.validate(idText, firstnameText, lastnameText, ageText)) {
+            if (!validator.validate(idText, firstnameText, lastnameText, ageText, storageValidate)) {
                 return new Response("A user with that id already exists", Status.BAD_REQUEST);
             }
 

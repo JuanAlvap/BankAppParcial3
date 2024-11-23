@@ -37,7 +37,7 @@ public class AccountController {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
 
-            if (!storageValidate.storageValidate(userIdText,initialBalanceText)) {
+            if (!validator.validate(userIdText,initialBalanceText, storageValidate)) {
                 return new Response("A user with that id already exists", Status.BAD_REQUEST);
             }
             return new Response("User register succesfully", Status.CREATED);

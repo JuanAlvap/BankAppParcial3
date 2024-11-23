@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/user/UserController.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/BaseService.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/transaction/TransactionExecuteWithdraw.java</file>
@@ -14,6 +15,11 @@
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/transaction/TransactionExecuteDeposit.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/validate/StringValidation.java</file>
             <file>file:/C:/Users/Juanpi/Desktop/BankAppParcial3/src/core/controllers/user/validate/IdValidate.java</file>
+=======
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/Validator.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/account/validate/PositiveNumberValidate.java</file>
+            <file>file:/C:/Users/cande/OneDrive/Documents/EjerciciosProgramacion/ParcialPoo3/VerdaderoFinalxd/BankAppParcial3/src/core/controllers/transaction/TransactionType.java</file>
+>>>>>>> c2096725415e4830cfa35ad60311ab4db9626e8d
         </group>
     </open-files>
 </project-private>
