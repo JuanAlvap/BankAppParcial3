@@ -12,14 +12,12 @@ public class AccountExistIdValidate implements StringValidation {
     @Override
     public boolean validate(String id){
         int idInt = Integer.parseInt(id);
-        boolean validate = false;
             for (User user : UserController.getUsers()) {
                 if (user.getId() == idInt) {
-                    validate = true;
-                    break;
+                    return true;
                 }
             }
-        return validate;
+        return false;
     }
     
 }
