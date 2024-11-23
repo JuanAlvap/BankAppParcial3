@@ -1,13 +1,12 @@
 package core.controllers.transaction;
 
-import core.controllers.BaseController;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.Transaction;
 import core.models.storage.TransactionStorage;
 import java.util.ArrayList;
 
-public class TransactionController extends BaseController {
+public class TransactionController{
 
     public static ArrayList<Transaction> getTransactions() {
         return TransactionStorage.getInstance().getTransactions();
