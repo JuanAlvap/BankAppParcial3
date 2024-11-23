@@ -1,6 +1,6 @@
 package core.controllers.account.validate;
 
-import core.controllers.StringValidation;
+import core.validate.StringValidation;
 
 public class PositiveNumberValidate implements StringValidation {
 

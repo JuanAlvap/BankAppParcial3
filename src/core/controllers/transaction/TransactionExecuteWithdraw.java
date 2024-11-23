@@ -1,5 +1,6 @@
 package core.controllers.transaction;
 
+import core.controllers.BaseService;
 import core.controllers.Validator;
 import core.controllers.account.validate.PositiveNumberValidate;
 import core.controllers.user.validate.StringNotEmptyValidate;
@@ -8,11 +9,9 @@ import core.controllers.utils.Status;
 import core.models.Account;
 import core.models.Transaction;
 import core.models.Withdraw;
-//import core.models.TransactionType;
-import core.models.storage.AccountStorage;
 import core.models.storage.TransactionStorage;
 
-public class TransactionExecuteWithdraw implements TransactionType{
+public class TransactionExecuteWithdraw extends BaseService implements TransactionType{
 
     public TransactionExecuteWithdraw() {
     }
@@ -36,12 +35,7 @@ public class TransactionExecuteWithdraw implements TransactionType{
                 return new Response("Amount must be a positive number", Status.BAD_REQUEST);
             }
 
-            Account sourceAccount = null;
-            for (Account account : AccountStorage.getInstance().getAccounts()) {
-                if (account.getId().equals(sourceAccountId)) {
-                    sourceAccount = account;
-                }
-            }
+            Account sourceAccount = findAccountById(sourceAccountId);
 
             double amountNumber = Double.parseDouble(amount);
             if (sourceAccount == null) {

@@ -1,6 +1,6 @@
 package core.controllers.account.validate;
 
-import core.controllers.StringValidation;
+import core.validate.StringValidation;
 import core.controllers.user.UserController;
 import core.models.User;
 

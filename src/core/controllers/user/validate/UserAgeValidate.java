@@ -1,10 +1,8 @@
 package core.controllers.user.validate;
 
-import core.controllers.StringValidation;
+import core.validate.NumberValidation;
 
-
-
-public class UserAgeValidate implements StringValidation {
+public class UserAgeValidate implements NumberValidation {
 
     public UserAgeValidate() {
     }

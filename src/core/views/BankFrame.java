@@ -3,11 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package core.views;
-import core.controllers.transaction.TransactionType;
-//import core.models.TransactionType;
 import core.controllers.account.AccountController;
 import core.controllers.transaction.TransactionController;
-import core.controllers.transaction.TransactionExecuteDeposit;
 import core.controllers.user.UserController;
 import core.controllers.utils.Response;
 import core.models.Account;
@@ -15,25 +12,16 @@ import core.models.Transaction;
 import core.models.User;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import core.controllers.utils.Status;
 
 public class BankFrame extends javax.swing.JFrame {
-
-    private ArrayList<Account> accounts;
-    private ArrayList<Transaction> transactions;
-    private ArrayList<User> users;
 
     /**
      * Creates new form BankFrame
      */
     public BankFrame() {
         initComponents();
-        this.accounts = new ArrayList<>();
-        this.transactions = new ArrayList<>();
-        this.users = new ArrayList<>();
     }
 
     /**
@@ -569,9 +557,7 @@ public class BankFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnExecuteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteActionPerformed
-        // TODO add your handling code here:
 
-        
         try {
             Response response = TransactionController.execute(txtSourceAccount.getText(), txtDestinationAccount.getText(), txtAmount.getText(), boxType.getItemAt(boxType.getSelectedIndex()));
             if (response.getStatus() >= 500) {
@@ -591,37 +577,40 @@ public class BankFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExecuteActionPerformed
 
     private void btnRefreshListUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshListUsersActionPerformed
-        // TODO add your handling code here:
-        ArrayList<User> listUser = UserController.getUsers();
+
+        ArrayList<User> listUsers = UserController.getUsers();
         DefaultTableModel model = (DefaultTableModel) tableListUsers.getModel();
         model.setRowCount(0);
 
-        listUser.sort((obj1, obj2) -> (obj1.getId() - obj2.getId()));
+        listUsers.sort((obj1, obj2) -> (obj1.getId() - obj2.getId()));
 
-        for (User user : listUser) {
+        for (User user : listUsers) {
             model.addRow(new Object[]{user.getId(), user.getFirstname() + " " + user.getLastname(), user.getAge(), user.getNumAccounts()});
         }
     }//GEN-LAST:event_btnRefreshListUsersActionPerformed
 
     private void btnRefreshListAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshListAccountsActionPerformed
-        // TODO add your handling code here:
-        ArrayList<Account> listAccount = AccountController.getAccounts();
+
+        ArrayList<Account> listAccounts = AccountController.getAccounts();
         DefaultTableModel model = (DefaultTableModel) tableListAccounts.getModel();
         model.setRowCount(0);
 
-        listAccount.sort((obj1, obj2) -> (obj1.getId().compareTo(obj2.getId())));
+        listAccounts.sort((obj1, obj2) -> (obj1.getId().compareTo(obj2.getId())));
 
-        for (Account account : listAccount) {
+        for (Account account : listAccounts) {
             model.addRow(new Object[]{account.getId(), account.getOwner().getId(), account.getBalance()});
         }
     }//GEN-LAST:event_btnRefreshListAccountsActionPerformed
 
     private void btnListTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListTransactionsActionPerformed
-        // TODO add your handling code here:
+
+        ArrayList<Transaction> listTransactions = TransactionController.getTransactions();
         DefaultTableModel model = (DefaultTableModel) tableListTransactions.getModel();
         model.setRowCount(0);
+        
+        Collections.reverse(listTransactions);
 
-        for (Transaction transaction : TransactionController.getSortedTransactions()) {
+        for (Transaction transaction : listTransactions) {
             model.addRow(new Object[]{transaction.getType(), (transaction.getSourceAccount() != null ? transaction.getSourceAccount().getId() : "None"), (transaction.getDestinationAccount() != null ? transaction.getDestinationAccount().getId() : "None"), transaction.getAmount()});
         }
     }//GEN-LAST:event_btnListTransactionsActionPerformed

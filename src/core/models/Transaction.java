@@ -1,15 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package core.models;
 
-import core.models.Account;
-
-/**
- *
- * @author edangulo
- */
 public class Transaction {
     
     private String type;
