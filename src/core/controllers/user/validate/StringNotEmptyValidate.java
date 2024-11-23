@@ -1,6 +1,6 @@
 package core.controllers.user.validate;
 
-import core.controllers.StringValidation;
+import core.validate.StringValidation;
 
 
 
