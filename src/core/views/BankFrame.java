@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package core.views;
 import core.controllers.account.AccountController;
 import core.controllers.transaction.TransactionController;
@@ -526,7 +522,7 @@ public class BankFrame extends javax.swing.JFrame {
             } else if (response.getStatus() >= 400) {
                 JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, response.getMessage() + "\nPerson fullname: " + response.getObject(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
                 txtID.setText("");
                 txtFirstname.setText("");
                 txtLastname.setText("");
@@ -546,7 +542,7 @@ public class BankFrame extends javax.swing.JFrame {
             } else if (response.getStatus() >= 400) {
                 JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, response.getMessage() + "\nPerson fullname: " + response.getObject(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
                 txtUserID.setText("");
                 txtInitialBalance.setText("");
             }
@@ -565,7 +561,7 @@ public class BankFrame extends javax.swing.JFrame {
             } else if (response.getStatus() >= 400) {
                 JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, response.getMessage() + "\nPerson fullname: " + response.getObject(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
                 txtAmount.setText("");
                 txtDestinationAccount.setText("");
                 txtSourceAccount.setText("");

@@ -25,19 +25,19 @@ public class AccountController {
             AccountExistIdValidate existIdValidate = new AccountExistIdValidate();
             AccountStorageValidate storageValidate = new AccountStorageValidate();
 
-            if (!validator.validate(idValidate,userIdText)) {
+            if (!validator.validate(idValidate, userIdText)) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
 
-            if (!validator.validate(initialBalanceValidate,initialBalanceText)) {
+            if (!validator.validate(initialBalanceValidate, initialBalanceText)) {
                 return new Response("Initial balance must be numeric", Status.BAD_REQUEST);
             }
 
-            if (!validator.validate(existIdValidate,userIdText)) {
-                return new Response("Id must be numeric", Status.BAD_REQUEST);
+            if (!validator.validate(existIdValidate, userIdText)) {
+                return new Response("Id already exists", Status.BAD_REQUEST);
             }
 
-            if (!validator.validate(userIdText,initialBalanceText, storageValidate)) {
+            if (!validator.validate(userIdText, initialBalanceText, storageValidate)) {
                 return new Response("A user with that id already exists", Status.BAD_REQUEST);
             }
             return new Response("User register succesfully", Status.CREATED);
